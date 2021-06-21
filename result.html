@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智能性格测试</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/starter-template/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      @keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+      html, body {
+        background-color: #00008b;
+        color: white;
+        width:100%;
+        height:100%;
+      }
+
+      #intro {
+        width:100%;
+        height:100%;
+        display: flex;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        font-size:0.8em;
+        line-height:3em;
+        animation: fadeIn linear 1.5s;
+      }
+    </style>
+  <body>
+    <div class="container" style="padding-top:50px;max-width:500px;">
+
+    <div style="width:100%;line-height:1em;font-size: 0.85em; padding-bottom:30px">
+      <p>你的性格倾向是：</p>
+      <p id="yourResult" style="font-size:3em;line-height:1.1em"></p>
+      <p>我们对你性格倾向的准确度信心为 <span id="percentage"></span> %</p>
+    </div>
+
+    <div style="width:100%;line-height:1em;font-size: 0.85em; padding-bottom:30px">
+      <p style="font-size:1.5em">你与外界的关系</p>
+      <p id="inwardoroutward" style="line-height:1.5em"></p>
+    </div>
+
+    <div style="width:100%;line-height:1em;font-size: 0.85em;">
+      <p style="font-size:1.5em">你与世界的关系</p>
+      <p id="reasoning" style="line-height:1.5em"></p>
+    </div>
+
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      window.onload = function(){
+      var rand = Math.floor(Math.random()*100) + 1;
+      if (rand < 20){
+        window.location.href = 'easterEgg.html';
+      }
+    };
+
+      var perc = Math.floor(Math.random()*5000) / 100 + 50
+      $('#percentage').html(perc.toFixed(2));
+
+      // This function selects a random element from an array.
+      function selRand(array1) {
+        return array1[Math.floor(Math.random()*array1.length)];
+      }
+
+      // Declare all the necessary arrays.
+      // These are for composition of character trait.
+      var fruits = Array(
+        "草莓","荔枝","木瓜","桂圆","苹果",
+        "樱桃","榴莲","西瓜","石榴","山楂",
+        "葡萄","椰子","山竹","橄榄","柿子",
+        "李子","莲雾","香梨","香瓜","香蕉",
+        "乌梅","菠萝","桑葚","红枣","黑枣",
+        "酸枣","枇杷","芒果","橙子","桔子","提子");
+
+      var gufengs = Array(
+        "长安","阳关","墨柳","洗砚","山河",
+        "忆梦","柚菀","青曦","泠月","瑾凉",
+        "殇忆","弄裳","肆意","拥抱","孤老",
+        "雅痞","唇眷","游轩","剑甫","幽玄",
+        "辰翼","宇峰","桃鸢","北乐","颜霜",
+        "残梅","浮熙","静柏","弦尽","檬初",
+        "月冥","月夜","汐云");
+
+      // Bullshit Clusters for "character"
+
+      var characterCs1 = Array(
+        "你很擅长与人相处，但其实你渴望内心的平静，渴望与自己对话。",
+        "和他人打交道对你来说有时很困难，但其实你非常渴望和人建立深层次的交流。",
+        "虽然你渴望与人的交流，但有时你会觉得你很难这么做。",
+        "你希望和人沟通更多，但又害怕别人因为你说的话而评价你。",
+        "和人打交道并不是一件轻松的事情，但你有这么做的，像是天性一样的动力。",
+        "你的性格看起来很外向，但是你也很珍惜自己独处的时间。",
+        "在人群中往往充满热情，甚至有时候会让人感到困扰，但有时你也会感觉自己会陷入深深的孤独。"
+      );
+
+      var characterCs2 = Array(
+        "你一直在试图尝试理解这个外部世界，但有时你会回到自己的内部世界中。",
+        "你对你自己的内部世界还有很多不满意的地方，所以你有时会从外部世界收取信息来试图完善它。",
+        "你对这个外部世界有很多不满意的地方，所以你会回到你的内部世界来试图改变它。",
+        "有时，你想投入外部世界寻求外界的认可，但有些时候，你会觉得自我的认可和来自内心的安宁才是最重要的。",
+        "有时你认为内部的安宁和自我的认可才是最重要的，但也有些时候你会进入外部世界，寻求他人的认可和称赞。",
+        "有时你会感觉到很孤独，哪怕是在人群之中，你往往会感受到自己与世界的剥离感。但你并不内向，而且渴望与人类相处。",
+        "你通常会用审慎的视角看世间万物。但有时这样会很累，所以你也向往轻松愉快的生活方式。",
+        "你通常会用审慎的视角看自己。但有时这很累，所以你也会希望放过自己。"
+      );
+
+      var characterCs3 = Array(
+        "总之，内在和外在并不完全统一，他们的矛盾在你的身上体现的淋漓尽致，而你在其中有自己的答案。",
+        "总之，在你的身上，对于内在的探寻和对于外部的渴求是永远不会停止，且不断在互相支撑和进化的。",
+        "总之，虽然内在和外在世界对你来说都很重要，但你时而关注其中的一方，时而关注其中的另一方。找到两者之间的平衡，可能是你一生的命题。",
+        "总之，虽然这个社会十分复杂，但自我也并非简单，在你的身上，这两者之间的矛盾体现的淋漓尽致，解决这种矛盾或许会是通往幸福的，和谐的生活的关键。",
+        "总之想深入了解这个世界的你，有时会发现自己迷失了自我，你回到自我中探寻，属于你自己的平静与安宁，有时也会忘记，这个世界中的其他人正在等着你去探索和发现。平衡好这两者之间的关系，也许会是你一生的命题。"
+      );
+
+      // More Bullshits for "reasoning"
+
+      var reasonCs1 = Array(
+        "负面情绪对你来说并不是太大的问题，你很容易把自己变得开心，但有时候你也会怀疑这种开心是不是一种廉价的糖水。",
+        "你面对负面情绪时往往会比较感性，你认为这是一个合适的应对方式。",
+        "你是一个情感非常丰富的人，遇到了你想做的事情你就会尽最大努力去完成。",
+        "通过逻辑思考问题对你来说是困难的，但有时你会觉得用逻辑思考问题是必要的。",
+        "你会觉得用逻辑思考的人比较木讷，所以当你用逻辑思考的时候，你会尽量隐蔽地进行。",
+        "你很欣赏用逻辑思考的人，但是你觉得自己不想成为只剩下逻辑的人。",
+      );
+
+      var reasonCs2 = Array(
+        "你喜欢追求新鲜事物，喜欢不断改变。但你做事缺乏耐性，很多时候遇到一些你解决不了的事情，你更倾向于使用迂回手段。你与人相处要特别有耐心，更要懂得坚持。",
+        "你的适应力强、有高度的想象力，但你常常会觉得自己和人比较疏离，觉得难以相信别人，难以对别人敞开心扉，所以你也不希望被隐瞒，希望能够被真诚的对待。",
+        "你的性格大气豪爽，讲话淡定从容，为人处事从不扭扭捏捏畏畏缩缩。你比较好强，在许多场合，如果落人下风你会觉得不舒服。但同时你又愿意照顾别人的面子，不会去揭穿别人的老底。",
+        "你做事很认真且细心，你喜欢过有条不紊的生活，如果出现计划以外的事情会让你感觉很苦恼，你习惯规划好一切，从生活中的小事开始。你享受一切按部就班的感觉。",
+        "你处事八面玲珑，擅长照顾他人的情绪。在别人眼里你是优雅而从容的，你享受这一切，这让你觉得非常舒适，而相对的，如果别人冒犯到你，那对他而言显然就不是一个很明智的选择。",
+        "你热情冲动、爱冒险、慷慨、天不怕地不怕，而且一旦下定决心，很难改变。你不喜欢太过于斤斤计较的人，如果与你相处的人有非常斤斤计较的性格，那你非常乐意与他起争执。",
+        "你是一个不喜欢在生活上有很多变故的人，而且你特别能忍耐，虽然对你来说，去适应一个东西的过程有点长，但是他们只要你适应之后，就会一直的坚持到底，不会轻易的改变的。所以你是朋友眼中的慢性子，你也不太愿意和那些性格急躁的人相处。",
+        "你深谋远虑，做事恩怨分明，而且直觉敏锐，对决定的事有执行力，不畏挫折，并且能坚持到底，对朋友也特别讲义气。同时你很讨厌在背后嚼人舌根的小人，你讨厌那些不坦荡的人。",
+        "在旁人眼中你的性格比较放荡不羁。事实上，你从不刻意隐藏自己，你喜欢向别人展现真正的自己。当你与他人相处的时候，你更乐意真诚地赞美他们。",
+        "在你的性格中，最大的特征就是坚定。你不太喜欢伪装自己，非常务实。你喜欢诚实的人，花言巧语会被你识破，并且你会觉得这是一种不尊重你的行为。",
+        "你对一切事物都感到好奇，特别喜欢研究，具有很好的观察力和洞察力，所以你很擅长观察他人 你会通过观察他人获得与他人相处的策略。",
+        "害怕突如其来的变动，虽然事实上你很善于适应新环境，但是你却喜欢安于现状。你希望和一些柔和的人相处，在与人相处时，你比较注重交往的距离，如果别人的行为过界会让你觉得倍感冒犯。"
+      );
+
+      $('#yourResult').html(selRand(gufengs)+selRand(fruits));
+      $('#inwardoroutward').html(selRand(characterCs1)+selRand(characterCs2)+selRand(characterCs3));
+      $('#reasoning').html(selRand(reasonCs1)+selRand(reasonCs2));
+
+    </script>
+  </body>
+</html>

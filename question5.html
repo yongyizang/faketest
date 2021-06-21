@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智能性格测试</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/starter-template/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      @keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+      html, body {
+        background-color: #00008b;
+        color: white;
+        width:100%;
+        height:100%;
+        animation: fadeIn linear 0.5s;
+      }
+
+      #intro {
+        height:100%;
+        width:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+    </style>
+  <body>
+    <div style="position:absolute;top:20px;left:20px;">
+      <p style="font-weight:bold">5 / 8</p>
+      <p id="timer" style="margin:0;padding:0;font-size:0.85em">已用 0:00</p>
+    </div>
+    <div id="intro" style="padding:10%;">
+      <p><span style="font-size:3em;">
+        为什么不放纵自己呢？活着已经很难了。
+      </span><br /><br />
+        <button type="button" class="btn btn-success" style="font-size:1em;margin-right:100px" onclick="location.href='question6.html';">是</button>
+        <button type="button" class="btn btn-success" style="font-size:1em;" onclick="location.href='question6.html';">否</button>
+      </p>
+
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+      var enterDate = new Date();
+      function secondsSinceEnter()
+      {
+        return Math.trunc((new Date() - enterDate) / 1000);
+      }
+
+      function addZero(a){
+        if (a < 10) {
+          return "0" + a;
+        } else {
+          return a;
+        }
+      }
+
+      window.onload = function(){
+        setInterval(function(){
+          countSec = secondsSinceEnter();
+          $('#timer').html(
+            "已用 " + Math.floor(countSec / 60) + ":" + addZero(countSec % 60)
+          );
+        }, 1000);
+      };
+    </script>
+  </body>
+</html>
